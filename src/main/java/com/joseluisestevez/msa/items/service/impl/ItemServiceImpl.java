@@ -14,7 +14,7 @@ import com.joseluisestevez.msa.items.models.Item;
 import com.joseluisestevez.msa.items.models.Product;
 import com.joseluisestevez.msa.items.service.ItemService;
 
-@Service
+@Service("itemService")
 public class ItemServiceImpl implements ItemService {
 	
 	@Autowired
