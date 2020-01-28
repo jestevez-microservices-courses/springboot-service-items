@@ -15,14 +15,14 @@ import com.joseluisestevez.msa.items.service.ItemService;
 public class ItemController {
 
 	@Autowired
-	@Qualifier("itemFeingService")
+	@Qualifier("itemService")
 	private ItemService itemService;
-	
+
 	@GetMapping("/list")
 	public List<Item> list() {
 		return itemService.findAll();
 	}
-	
+
 	@GetMapping("/detail/{id}/quantity/{quantity}")
 	public Item detail(@PathVariable Long id, @PathVariable Integer quantity) {
 		return itemService.findById(id, quantity);

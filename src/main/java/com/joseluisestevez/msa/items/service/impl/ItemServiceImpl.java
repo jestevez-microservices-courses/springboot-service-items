@@ -16,21 +16,24 @@ import com.joseluisestevez.msa.items.service.ItemService;
 
 @Service("itemService")
 public class ItemServiceImpl implements ItemService {
-	
+
 	@Autowired
 	private RestTemplate restClient;
 
 	@Override
 	public List<Item> findAll() {
-		List<Product> products = Arrays.asList(restClient.getForObject("http://localhost:8001/list", Product[].class) );
-		return products.stream().map(product -> new Item(product, 1)).collect(Collectors.toList());
+		List<Product> products = Arrays.asList(restClient
+				.getForObject("http://service-products/list", Product[].class));
+		return products.stream().map(product -> new Item(product, 1))
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public Item findById(Long id, Integer quantity) {
 		Map<String, String> pathVars = new HashMap<>();
 		pathVars.put("id", id.toString());
-		Product product = restClient.getForObject("http://localhost:8001/view/{id}", Product.class, pathVars);
+		Product product = restClient.getForObject(
+				"http://service-products/view/{id}", Product.class, pathVars);
 		return new Item(product, quantity);
 	}
 
