@@ -15,7 +15,7 @@ import com.joseluisestevez.msa.items.service.ItemService;
 public class ItemController {
 
 	@Autowired
-	@Qualifier("itemService")
+	@Qualifier("itemFeignService")
 	private ItemService itemService;
 
 	@GetMapping("/list")

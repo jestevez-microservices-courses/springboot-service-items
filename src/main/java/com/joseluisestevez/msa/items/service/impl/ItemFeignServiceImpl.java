@@ -10,8 +10,8 @@ import com.joseluisestevez.msa.items.models.Item;
 import com.joseluisestevez.msa.items.service.ItemService;
 import com.joseluisestevez.msa.items.clients.ProductClientRest;
 
-@Service("itemFeingService")
-public class ItemFeingServiceImpl implements ItemService {
+@Service("itemFeignService")
+public class ItemFeignServiceImpl implements ItemService {
 	
 	@Autowired
 	private ProductClientRest productClientRest;
