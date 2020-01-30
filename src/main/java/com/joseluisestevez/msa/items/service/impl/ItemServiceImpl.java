@@ -13,8 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.joseluisestevez.msa.commons.products.dto.ProductDto;
 import com.joseluisestevez.msa.items.models.Item;
-import com.joseluisestevez.msa.items.models.Product;
 import com.joseluisestevez.msa.items.service.ItemService;
 
 @Service("itemService")
@@ -25,8 +25,8 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public List<Item> findAll() {
-		List<Product> products = Arrays.asList(restClient
-				.getForObject("http://service-products/list", Product[].class));
+		List<ProductDto> products = Arrays.asList(restClient.getForObject(
+				"http://service-products/list", ProductDto[].class));
 		return products.stream().map(product -> new Item(product, 1))
 				.collect(Collectors.toList());
 	}
@@ -35,29 +35,30 @@ public class ItemServiceImpl implements ItemService {
 	public Item findById(Long id, Integer quantity) {
 		Map<String, String> pathVars = new HashMap<>();
 		pathVars.put("id", id.toString());
-		Product product = restClient.getForObject(
-				"http://service-products/view/{id}", Product.class, pathVars);
+		ProductDto product = restClient.getForObject(
+				"http://service-products/view/{id}", ProductDto.class,
+				pathVars);
 		return new Item(product, quantity);
 	}
 
 	@Override
-	public Product save(Product product) {
-		HttpEntity<Product> body = new HttpEntity<>(product);
-		ResponseEntity<Product> responseEntity = restClient.exchange(
+	public ProductDto save(ProductDto product) {
+		HttpEntity<ProductDto> body = new HttpEntity<>(product);
+		ResponseEntity<ProductDto> responseEntity = restClient.exchange(
 				"http://service-products/create", HttpMethod.POST, body,
-				Product.class);
+				ProductDto.class);
 		return responseEntity.getBody();
 	}
 
 	@Override
-	public Product update(Product product, Long id) {
-		HttpEntity<Product> body = new HttpEntity<>(product);
+	public ProductDto update(ProductDto product, Long id) {
+		HttpEntity<ProductDto> body = new HttpEntity<>(product);
 		Map<String, String> pathVars = new HashMap<>();
 		pathVars.put("id", id.toString());
 
-		ResponseEntity<Product> responseEntity = restClient.exchange(
+		ResponseEntity<ProductDto> responseEntity = restClient.exchange(
 				"http://service-products/edit/{id}", HttpMethod.PUT, body,
-				Product.class, pathVars);
+				ProductDto.class, pathVars);
 		return responseEntity.getBody();
 	}
 

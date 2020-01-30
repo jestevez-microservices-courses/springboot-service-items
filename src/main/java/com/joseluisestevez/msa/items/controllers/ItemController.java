@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.joseluisestevez.msa.commons.products.dto.ProductDto;
 import com.joseluisestevez.msa.items.models.Item;
-import com.joseluisestevez.msa.items.models.Product;
 import com.joseluisestevez.msa.items.service.ItemService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
@@ -55,7 +55,7 @@ public class ItemController {
 	}
 
 	public Item fakeViewWithCircuitBreaker(Long id, Integer quantity) {
-		Product product = new Product();
+		ProductDto product = new ProductDto();
 		product.setId(id);
 		product.setName("Product not avilable");
 		product.setPrice(0.0);
@@ -86,13 +86,14 @@ public class ItemController {
 
 	@PostMapping("/create")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Product create(@RequestBody Product product) {
+	public ProductDto create(@RequestBody ProductDto product) {
 		return itemService.save(product);
 	}
 
 	@PutMapping("/edit/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Product edit(@RequestBody Product product, @PathVariable Long id) {
+	public ProductDto edit(@RequestBody ProductDto product,
+			@PathVariable Long id) {
 		return itemService.update(product, id);
 	}
 

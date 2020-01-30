@@ -12,24 +12,24 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.joseluisestevez.msa.items.models.Product;
+import com.joseluisestevez.msa.commons.products.dto.ProductDto;
 
 @FeignClient(name = "service-products")
 public interface ProductClientRest {
 
 	@GetMapping("/list")
-	List<Product> list();
+	List<ProductDto> list();
 
 	@GetMapping("/view/{id}")
-	Product view(@PathVariable Long id);
+	ProductDto view(@PathVariable Long id);
 
 	@PostMapping("/create")
 	@ResponseStatus(HttpStatus.CREATED)
-	Product create(@RequestBody Product product);
+	ProductDto create(@RequestBody ProductDto product);
 
 	@PutMapping("/edit/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	Product edit(@RequestBody Product product, @PathVariable Long id);
+	ProductDto edit(@RequestBody ProductDto product, @PathVariable Long id);
 
 	@DeleteMapping("/delete/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)

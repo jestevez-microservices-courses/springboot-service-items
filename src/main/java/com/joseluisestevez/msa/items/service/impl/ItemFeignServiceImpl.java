@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.joseluisestevez.msa.commons.products.dto.ProductDto;
 import com.joseluisestevez.msa.items.clients.ProductClientRest;
 import com.joseluisestevez.msa.items.models.Item;
-import com.joseluisestevez.msa.items.models.Product;
 import com.joseluisestevez.msa.items.service.ItemService;
 
 @Service("itemFeignService")
@@ -30,12 +30,12 @@ public class ItemFeignServiceImpl implements ItemService {
 	}
 
 	@Override
-	public Product save(Product product) {
+	public ProductDto save(ProductDto product) {
 		return productClientRest.create(product);
 	}
 
 	@Override
-	public Product update(Product product, Long id) {
+	public ProductDto update(ProductDto product, Long id) {
 		return productClientRest.edit(product, id);
 	}
 	@Override

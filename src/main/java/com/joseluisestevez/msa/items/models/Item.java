@@ -1,25 +1,27 @@
 package com.joseluisestevez.msa.items.models;
 
+import com.joseluisestevez.msa.commons.products.dto.ProductDto;
+
 public class Item {
-	
-	private Product product;
+
+	private ProductDto product;
 	private Integer quantity;
 
 	public Item() {
 		super();
 	}
-	
-	public Item(Product product, Integer quantity) {
+
+	public Item(ProductDto product, Integer quantity) {
 		super();
 		this.product = product;
 		this.quantity = quantity;
 	}
 
-	public Product getProduct() {
+	public ProductDto getProduct() {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(ProductDto product) {
 		this.product = product;
 	}
 
