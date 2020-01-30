@@ -37,7 +37,7 @@ public class ItemController {
 	private Environment env;
 
 	@Autowired
-	@Qualifier("itemService")
+	@Qualifier("itemFeignService")
 	private ItemService itemService;
 
 	@Value("${msa.configuration.text}")
